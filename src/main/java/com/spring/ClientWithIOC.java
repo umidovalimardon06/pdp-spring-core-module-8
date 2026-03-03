@@ -16,7 +16,7 @@ public class ClientWithIOC {
 
     private static void isSameHashCode(ApplicationContext context) {
         for (int i = 1; i < 10; i++) {
-            ServiceOne instance = context.getBean(ServiceOneImp1.class);
+            ServiceOne instance = context.getBean(ServiceOne.class);
             System.out.println(instance.hashCode());
         }
     }

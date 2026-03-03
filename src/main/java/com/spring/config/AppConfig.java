@@ -9,8 +9,4 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "com.spring")
 public class AppConfig {
-    @Bean
-    public ServiceOne serviceOne() {
-        return new ServiceOneImp1();
-    }
 }
