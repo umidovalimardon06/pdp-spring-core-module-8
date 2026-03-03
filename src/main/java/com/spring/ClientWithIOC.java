@@ -1,7 +1,6 @@
 package com.spring;
 
 import com.spring.config.AppConfig;
-import com.spring.services.ServiceOneImp1;
 import com.spring.services.interfaces.ServiceOne;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -11,12 +10,11 @@ public class ClientWithIOC {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         isSameHashCode(context);
-
     }
 
     private static void isSameHashCode(ApplicationContext context) {
         for (int i = 1; i < 10; i++) {
-            ServiceOne instance = context.getBean(ServiceOneImp1.class);
+            ServiceOne instance = context.getBean("serviceOneImplementation", ServiceOne.class);
             System.out.println(instance.hashCode());
         }
     }
