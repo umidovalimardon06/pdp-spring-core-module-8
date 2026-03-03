@@ -1,22 +1,23 @@
 package com.spring;
 
+import com.spring.config.AppConfig;
 import com.spring.services.ServiceOneImp1;
+import com.spring.services.interfaces.ServiceOne;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ClientWithIOC {
     public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("bean-container.xml");
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
-        isSingletonTestLoop(context);
+        isSameHashCode(context);
 
     }
 
-    private static void isSingletonTestLoop(ApplicationContext context) {
-        for (int i = 1; i <= 10; i++) {
-            ServiceOneImp1 serviceOneBeanFromContainer = context.getBean(ServiceOneImp1.class);
-            System.out.println(serviceOneBeanFromContainer.hashCode());
+    private static void isSameHashCode(ApplicationContext context) {
+        for (int i = 1; i < 10; i++) {
+            ServiceOne instance = context.getBean(ServiceOneImp1.class);
+            System.out.println(instance.hashCode());
         }
     }
-
 }
