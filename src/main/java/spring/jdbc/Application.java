@@ -5,17 +5,23 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Component;
 import spring.jdbc.config.AppConfig;
+import spring.jdbc.service.UserService;
+
 import javax.sql.DataSource;
 
 @Component
 public class Application {
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        DataSource dataSource = context.getBean(DataSource.class);
 
+        DataSource dataSource = context.getBean(DataSource.class);
         DriverManagerDataSource ds = (DriverManagerDataSource) dataSource;
         System.out.println("URL: " + ds.getUrl());
         System.out.println("Username: " + ds.getUsername());
         System.out.println("Password: " + ds.getPassword());
+
+        UserService userService = context.getBean(UserService.class);
+        userService.registerUser("Alice", "alice@mail.com");
+        userService.printAllUsers();
     }
 }

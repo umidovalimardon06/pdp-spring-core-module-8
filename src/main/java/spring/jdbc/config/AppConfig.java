@@ -3,8 +3,8 @@ package spring.jdbc.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -19,13 +19,24 @@ public class AppConfig {
         String database_username = System.getenv("DB_USER");
         String database_password = System.getenv("DB_PASSWORD");
 
-
         dataSource.setDriverClassName("org.postgresql.Driver");
-
         dataSource.setUrl(database_url);
         dataSource.setUsername(database_username);
         dataSource.setPassword(database_password);
 
         return dataSource;
     }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
 }
+
+
+
+
+
+
+
